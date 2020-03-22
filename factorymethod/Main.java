@@ -6,7 +6,7 @@ public class Main {
         AterioivaOtus opettaja = new Opettaja();
         opettaja.aterioi();
 
-        AterioivaOtus opiskelija = new Opettaja();
+        AterioivaOtus opiskelija = new Opiskelija();
         opiskelija.aterioi();
 
         AterioivaOtus assari = new Assari();
