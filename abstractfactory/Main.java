@@ -1,12 +1,31 @@
 package abstractfactory;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 public class Main {
 
     public static void main(String[] args) {
-        Jasper opiskelevaJasper = new Jasper(new AdidasFactory(), "opiskeleva");
-        opiskelevaJasper.tulostaVaatteet();
+        Class<?> c = null;
+        VaateFactory factory = null;
 
-        Jasper insinooriJasper = new Jasper(new BossFactory(), "insinööri");
-        insinooriJasper.tulostaVaatteet();
+        Properties properties = new Properties();
+        
+        try {
+            properties.load(new FileInputStream("abstractfactory/tehdas.properties"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            c = Class.forName(properties.getProperty("tehdas"));
+            factory = (VaateFactory) c.newInstance();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        Jasper opiskelevaJasper = new Jasper(factory, properties.getProperty("jasper"));
+        opiskelevaJasper.tulostaVaatteet();
     }
 }
