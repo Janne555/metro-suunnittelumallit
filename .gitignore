@@ -1,2 +1,4 @@
 javafx
 .classpath
+*.class
+.idea
